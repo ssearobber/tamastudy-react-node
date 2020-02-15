@@ -1,7 +1,9 @@
 {
-  "name": "tamastudy-react-part2",
+  "name": "react",
   "version": "0.1.0",
   "private": true,
+  "author": "jongseok",
+  "description": "타마스터디 React PART 2",
   "dependencies": {
     "@emotion/core": "^10.0.27",
     "@testing-library/jest-dom": "^4.2.4",
