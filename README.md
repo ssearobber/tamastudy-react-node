@@ -1,8 +1,13 @@
+# 주의사항
+
+> tamasutdy 라는 오타가있었습니다...
+> 당연히 tamastudy이니, 이점 유의해주세요 ㅠ\_ㅠ 죄송합니당..
+
 # git 작업 순서
 
 ## 원본 Repository
 
-[원본 repo](https://github.com/jonsoku2/tamasutdy-react-node)
+[원본 repo](https://github.com/jonsoku2/tamastudy-react-node)
 
 ## 1. (최초) Fork
 
@@ -21,7 +26,7 @@
 <img src="./readme/add-remote.png" width="90%"></img>
 
 ```bash
-git remote add tama https://github.com/jonsoku2/tamasutdy-react-node
+git remote add tama https://github.com/jonsoku2/tamastudy-react-node
 ```
 
 ## 3. (최초) vscode 열기
