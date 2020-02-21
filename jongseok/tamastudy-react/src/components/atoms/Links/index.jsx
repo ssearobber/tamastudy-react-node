@@ -1,8 +1,8 @@
-import React from 'react';
 import { css } from '@emotion/core';
 import { Link } from 'react-router-dom';
+import React from 'react';
 
-const GLink = ({ linkTitle, linkTo, ...rest }) => {
+const Links = ({ linkTitle, linkTo, ...rest }) => {
   return (
     <div {...rest}>
       <Link
@@ -28,4 +28,4 @@ const GLink = ({ linkTitle, linkTo, ...rest }) => {
   );
 };
 
-export default GLink;
+export default Links;

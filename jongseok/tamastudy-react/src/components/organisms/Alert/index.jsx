@@ -1,8 +1,8 @@
-import React, { useState, useCallback } from 'react';
 import { css } from '@emotion/core';
-import Modal from '../Modal';
+import React, { useState, useCallback } from 'react';
+import Modal from '../../atoms/Modal';
 
-const GlobalAlert = ({}) => {
+const Alert = ({}) => {
   // 일단 하드코딩.. 나중에 리덕스에서 꺼내올꺼임.
   const alerts = [{ id: 'alert1', alertTypes: 'sample alert type', msg: 'sample msg' }];
 
@@ -30,7 +30,7 @@ const GlobalAlert = ({}) => {
           `}
           onClick={handleCloseAlert}
         >
-          {alerts.map(alert => (
+          {alerts.map((alert) => (
             <p
               css={css`
                 width: 200px;
@@ -48,4 +48,4 @@ const GlobalAlert = ({}) => {
   }
 };
 
-export default GlobalAlert;
+export default Alert;

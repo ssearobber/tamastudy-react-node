@@ -1,8 +1,8 @@
+import { css } from '@emotion/core';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { css } from '@emotion/core';
 
-const GlobalBackdrop = ({ onClick }) => {
+const Backdrop = ({ onClick }) => {
   return ReactDOM.createPortal(
     <div
       css={css`
@@ -15,9 +15,9 @@ const GlobalBackdrop = ({ onClick }) => {
         z-index: 10;
       `}
       onClick={onClick}
-    ></div>,
+    />,
     document.getElementById('backdrop-hook'),
   );
 };
 
-export default GlobalBackdrop;
+export default Backdrop;
