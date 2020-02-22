@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import WithAuth, { AuthContext } from '../../hoc/WithAuth';
+import HomeNavSlider from '../../components/organisms/HomeNavSlider';
+import HomeMainSlider from '../../components/organisms/HomeMainSlider';
 
 const Home = () => {
-  return <div></div>;
+  const auth = useContext(AuthContext);
+  return (
+    <div>
+      <HomeNavSlider />
+      <HomeMainSlider />
+    </div>
+  );
 };
 
-export default Home;
+export default WithAuth(Home);
