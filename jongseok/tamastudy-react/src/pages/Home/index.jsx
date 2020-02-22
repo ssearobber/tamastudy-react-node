@@ -1,22 +1,16 @@
 import React, { useContext } from 'react';
 import WithAuth, { AuthContext } from '../../hoc/WithAuth';
-import Typo from '../../components/atoms/Typo';
+import HomeNavSlider from '../../components/organisms/HomeNavSlider';
+import HomeMainSlider from '../../components/organisms/HomeMainSlider';
 
 const Home = () => {
+  // eslint-disable-next-line
   const auth = useContext(AuthContext);
   return (
-    <div>
-      <Typo variant="h1" display="inline-flex">
-        asddsa
-      </Typo>
-      <p>
-        auth status : <strong>{auth.authenticated ? 'true' : 'false'}</strong>
-      </p>
-      <p>
-        loading status : <strong>{auth.loading ? 'loading...' : 'complete'}</strong>
-      </p>
-      <p>from WithAuth HOC Component</p>
-    </div>
+    <>
+      <HomeNavSlider />
+      <HomeMainSlider />
+    </>
   );
 };
 

@@ -6,7 +6,7 @@ const Alert = () => {
   // 일단 하드코딩.. 나중에 리덕스에서 꺼내올꺼임.
   const alerts = [{ id: 'alert1', alertTypes: 'sample alert type', msg: 'sample msg' }];
 
-  const [alertStatus, setAlertStatus] = useState(true);
+  const [alertStatus, setAlertStatus] = useState(false);
 
   const handleCloseAlert = useCallback(() => {
     setAlertStatus(false);
