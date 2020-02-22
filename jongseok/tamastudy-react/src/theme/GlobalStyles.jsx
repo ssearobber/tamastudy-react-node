@@ -7,8 +7,8 @@ const GlobalStyles = () => (
   <Global
     styles={css`
       body > * {
-        all: unset;
         font-family: 'Nanum Gothic';
+        all: unset;
       }
     `}
   />

@@ -1,6 +1,6 @@
 import { css } from '@emotion/core';
 import { GHeaderLinkMapping } from '../../atoms/Links/LinkMapping';
-import { ReactComponent as Logo } from '../../../img/logo/nike-logo@logotyp.us.svg';
+import { ReactComponent as Logo } from '../../../assets/images/logo/nike.svg';
 import React, { useState, useMemo } from 'react';
 import Links from '../../atoms/Links';
 import SideNav from '../SideNav';

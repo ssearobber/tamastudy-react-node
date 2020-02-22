@@ -7,21 +7,19 @@ import Alert from './components/organisms/Alert';
 
 function App() {
   return (
-    <>
-      <Router>
-        <Header />
-        <Alert />
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/tama">
-            <Tama />
-          </Route>
-          <Redirect from="*" to="/" />
-        </Switch>
-      </Router>
-    </>
+    <Router>
+      <Header />
+      <Alert />
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route exact path="/tama">
+          <Tama />
+        </Route>
+        <Redirect from="*" to="/" />
+      </Switch>
+    </Router>
   );
 }
 

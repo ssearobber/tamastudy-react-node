@@ -2,7 +2,7 @@ import { css } from '@emotion/core';
 import React, { useState, useCallback } from 'react';
 import Modal from '../../atoms/Modal';
 
-const Alert = ({}) => {
+const Alert = () => {
   // 일단 하드코딩.. 나중에 리덕스에서 꺼내올꺼임.
   const alerts = [{ id: 'alert1', alertTypes: 'sample alert type', msg: 'sample msg' }];
 
@@ -30,8 +30,9 @@ const Alert = ({}) => {
           `}
           onClick={handleCloseAlert}
         >
-          {alerts.map((alert) => (
+          {alerts.map((alert, index) => (
             <p
+              key={index}
               css={css`
                 width: 200px;
                 height: 100px;
