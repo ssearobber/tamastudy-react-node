@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
 import { css } from '@emotion/core';
+import { Link } from 'react-router-dom';
+import React from 'react';
 
-const GLink = ({ linkTitle, linkTo, ...rest }) => {
+const Links = ({ linkTitle, linkTo, ...rest }) => {
   return (
     <div {...rest}>
       <Link
@@ -10,13 +10,14 @@ const GLink = ({ linkTitle, linkTo, ...rest }) => {
         css={css`
           text-decoration: none;
           font-size: 20px;
-          color: inherit;
           font-weight: 600;
-          transition: all 0.2s; /*애니메이션 효과*/
+          color: grey;
+          transition: all 0.3s;
           display: block;
+          text-align: center;
           width: 100px;
           &:hover {
-            color: gold;
+            color: black;
             font-weight: 900;
           }
         `}
@@ -27,4 +28,4 @@ const GLink = ({ linkTitle, linkTo, ...rest }) => {
   );
 };
 
-export default GLink;
+export default Links;
