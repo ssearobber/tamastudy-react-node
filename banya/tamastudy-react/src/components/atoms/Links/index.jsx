@@ -1,17 +1,12 @@
-import React from 'react';
 import { css } from '@emotion/core';
 import { Link } from 'react-router-dom';
+import React from 'react';
 
-const GLink = ({ linkTitle, ...rest }) => {
-  const LinkMapping = {
-    HOME: '/',
-    TAMA: '/tama',
-    CONTACT: '/contact',
-  };
+const Links = ({ linkTitle, linkTo, ...rest }) => {
   return (
     <div {...rest}>
       <Link
-        to={LinkMapping[linkTitle]}
+        to={linkTo}
         css={css`
           text-decoration: none;
           font-size: 20px;
@@ -33,4 +28,4 @@ const GLink = ({ linkTitle, ...rest }) => {
   );
 };
 
-export default GLink;
+export default Links;
