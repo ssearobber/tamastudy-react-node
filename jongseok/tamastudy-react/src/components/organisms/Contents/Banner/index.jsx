@@ -6,9 +6,9 @@ import theme from '../../../../theme';
 const DATA = [
   'https://brandavenue.r10s.jp/img/brand/1040.jpg',
   'https://brandavenue.r10s.jp/img/brand/8785.jpg',
-  'https://brandavenue.r10s.jp/img/brand/7415.jpg',
+  'https://brandavenue.r10s.jp/img/brand/1030.jpg',
   'https://brandavenue.r10s.jp/img/brand/7364.jpg',
-  'https://brandavenue.r10s.jp/img/brand/7364.jpg',
+  'https://brandavenue.r10s.jp/img/brand/8849.jpg',
   'https://brandavenue.r10s.jp/img/brand/7415.jpg',
 ];
 

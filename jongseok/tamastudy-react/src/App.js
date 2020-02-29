@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Tama from './pages/Tama';
 import Header from './components/organisms/Header';
 import Alert from './components/organisms/Alert';
+import Footer from './components/organisms/Footer';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         </Route>
         <Redirect from="*" to="/" />
       </Switch>
+      <Footer />
     </Router>
   );
 }
