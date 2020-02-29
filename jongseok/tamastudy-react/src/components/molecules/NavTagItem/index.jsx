@@ -13,14 +13,12 @@ const NavTagItem = ({ variant = 'Apple', title = 'no data', ...props }) => {
     <div
       css={css`
         flex: none;
-        width: 16rem;
-        height: 6rem;
-        max-width: 16rem;
-        max-height: 6rem;
-        &:nth-child(2n) {
+        width: 160px;
+        height: 60px;
+        &:nth-of-type(2n) {
           background-color: ${theme.colors.main.secondary};
         }
-        &:nth-child(2n - 1) {
+        &:nth-of-type(2n - 1) {
           background-color: ${theme.colors.main.tertiary};
         }
         display: flex;

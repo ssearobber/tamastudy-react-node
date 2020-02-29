@@ -1,14 +1,13 @@
 import { css } from '@emotion/core';
 import { ReactComponent as Logo } from '../../../assets/images/logo/nike.svg';
 import { PowerSettingsNew } from '@material-ui/icons';
-import { useTheme } from 'emotion-theming';
 import React, { useState } from 'react';
 import SideNav from '../SideNav';
 import Typo from '../../atoms/Typo';
 import Container from '../../atoms/Container';
+import theme from '../../../theme';
 
 const Header = () => {
-  const theme = useTheme();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -19,7 +18,7 @@ const Header = () => {
           align-items: center;
           justify-content: space-between;
           box-sizing: border-box;
-          padding: 2rem 2rem 2rem 0;
+          padding: ${theme.space}px ${theme.space}px ${theme.space}px ${theme.space}px;
         `}
       >
         <div

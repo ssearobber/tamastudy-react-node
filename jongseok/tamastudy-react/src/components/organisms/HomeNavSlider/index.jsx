@@ -1,8 +1,9 @@
 import React from 'react';
 import { css } from '@emotion/core';
 import NavTagItem from '../../molecules/NavTagItem';
+import theme from '../../../theme';
 
-const HomeNavSlider = () => {
+const HomeNavSlider = ({ ...props }) => {
   return (
     <div
       css={css`
@@ -10,8 +11,11 @@ const HomeNavSlider = () => {
         align-items: center;
         justify-content: space-between;
         box-sizing: border-box;
-        padding: 2rem 2rem 2rem 0;
+        padding: ${theme.space}px ${theme.space}px ${theme.space}px ${theme.space}px;
+        width: calc(100% - ${theme.space}px);
+        overflow: hidden;
       `}
+      {...props}
     >
       <div>
         <div

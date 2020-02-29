@@ -41,6 +41,7 @@ const HomeMainSlider = () => {
     <Swiper {...params}>
       {DUMMY_DATA.map((data) => (
         <div
+          key={data.id}
           css={css`
             width: 100vw;
             height: 60rem;
