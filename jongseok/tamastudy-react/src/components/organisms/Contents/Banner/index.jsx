@@ -16,14 +16,21 @@ const Banner = () => {
   return (
     <div
       css={css`
-        display: flex;
-        justify-content: space-around;
-        flex-wrap: wrap;
+        box-sizing: border-box;
+        padding: 0 ${theme.space}px;
+        display: grid;
+        width: 100%;
+        grid-template-columns: repeat(3, 1fr);
+        justify-items: center;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+        grid-gap: ${theme.space}px;
         ${mediaQuery(2)} {
           width: 1000px;
           margin: 0 auto;
-          justify-content: space-between;
-          flex-wrap: nowrap;
+          padding: 0;
+          grid-template-columns: repeat(6, minmax(160px, 1fr));
         }
       `}
     >
@@ -31,19 +38,11 @@ const Banner = () => {
         <div
           key={data}
           css={css`
-            width: 182px;
-            height: 55px;
+            width: 100%;
+            box-sizing: border-box;
             border: 1px solid ${theme.colors.base.grey};
-            margin-bottom: ${theme.space}px;
-            &:nth-of-type(4),
-            :nth-of-type(5),
-            :nth-of-type(6) {
-              margin-bottom: 0;
-            }
             ${mediaQuery(2)} {
-              &:not(:last-of-type) {
-                margin-right: ${theme.space}px;
-              }
+              width: 100%;
             }
           `}
         >
