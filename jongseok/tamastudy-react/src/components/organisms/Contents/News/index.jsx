@@ -43,9 +43,13 @@ const News = () => {
       ></div>
       <div
         css={css`
-          flex-basis: 300px;
-          margin-left: ${theme.space * 3}px;
+          flex-basis: 100px;
+          margin-left: ${theme.space * 2}px;
           margin-right: ${theme.space}px;
+          ${mediaQuery(2)} {
+            margin-left: ${theme.space * 3}px;
+            flex-basis: 300px;
+          }
         `}
       >
         <Typo

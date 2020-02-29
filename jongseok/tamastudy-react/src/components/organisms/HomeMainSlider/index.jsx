@@ -8,19 +8,19 @@ const DUMMY_DATA = [
   {
     id: uuid(),
     imgSrc:
-      'https://images.unsplash.com/photo-1423784346385-c1d4dac9893a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+      'https://images.unsplash.com/photo-1582787264476-ceb5898497c6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
     imgAlt: 'sample image',
   },
   {
     id: uuid(),
     imgSrc:
-      'https://images.unsplash.com/photo-1536584754829-12214d404f32?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+      'https://images.unsplash.com/photo-1528150230181-99bbf7b22162?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
     imgAlt: 'sample image',
   },
   {
     id: uuid(),
     imgSrc:
-      'https://images.unsplash.com/photo-1582499520676-c432ca4c5596?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+      'https://images.unsplash.com/photo-1557231146-afde25e6598f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
     imgAlt: 'sample image',
   },
 ];
