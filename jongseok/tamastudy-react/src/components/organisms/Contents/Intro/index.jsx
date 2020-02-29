@@ -65,8 +65,11 @@ const Intro = () => {
             </div>
             <div
               css={css`
-                width: 200px;
+                width: 202px;
                 word-break: break-all;
+                ${mediaQuery(2)} {
+                  width: 276px;
+                }
               `}
             >
               <Typo

@@ -45,6 +45,7 @@ const News = () => {
         css={css`
           flex-basis: 300px;
           margin-left: ${theme.space * 3}px;
+          margin-right: ${theme.space}px;
         `}
       >
         <Typo
