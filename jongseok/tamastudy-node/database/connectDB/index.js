@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
-const MONGO_URI =
-  'mongodb+srv://whdtjr2792:!canyou12@cluster0-mgk1n.gcp.mongodb.net/tamastudy-react-node?retryWrites=true&w=majority';
+const MONGO_URI = process.env.MONGO_URI | '';
 
 const connectDB = async () => {
   try {
