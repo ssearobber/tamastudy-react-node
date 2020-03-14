@@ -61,6 +61,9 @@ router.post('/post/create', async (req, res, next) => {
 // http://localhost:4000/post/5e6c8fcbc66c3058b5fcf067
 router.get('/post/:postId', async (req, res, next) => {
   try {
+    // mongoose findById => 무엇(포스트)을 찾아야하므로
+    // id에 해당하는 post를 찾을 수 없으면,
+    // post는 존재하지않는다는 의미로 null을 반환한다.
     const post = await Post.findById({ _id: req.params.postId });
     // post가 존재하지 않을 때
     if (!post) {
@@ -93,6 +96,10 @@ router.get('/post/:postId', async (req, res, next) => {
 // http://localhost:4000/post/delete/5e6c8fcbc66c3058b5fcf067
 router.delete('/post/delete/:postId', async (req, res, next) => {
   try {
+    // mongoose findByIdAndDelete => 무엇(포스트)을 삭제할지 찾아야하므로
+    // id에 해당하는 post를 찾을 수 없으면,
+    // post는 존재하지않는다는 의미로 null을 반환한다.
+    // 1번째 인자에는 id :  { _id: req.params.postId } => 무엇(무슨 포스트)을 삭제할지 찾아야하므로
     const post = await Post.findByIdAndDelete({ _id: req.params.postId });
     // post가 존재하지 않을 때
     if (!post) {
@@ -107,7 +114,49 @@ router.delete('/post/delete/:postId', async (req, res, next) => {
     res.status(200).json({
       success: true,
       error: null,
-      result: `${req.params.postID}번 포스트의 삭제가 완료되었습니다. `,
+      result: `${req.params.postId}번 포스트의 삭제가 완료되었습니다. `,
+    });
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      error: error.message,
+      result: null,
+    };
+  }
+});
+
+// Update
+// updatePostById
+// postman uri ex
+// http://localhost:4000/post/update/5e6c8fcbc66c3058b5fcf067
+router.put('/post/update/:postId', async (req, res, next) => {
+  try {
+    // mongoose findByIdAndUpdate  => 무엇(포스트)을 업데이트(put)할지 찾아야하므로
+    // id에 해당하는 post를 찾을 수 없으면,
+    // post는 존재하지않는다는 의미로 null을 반환한다.
+    // 1번째 인자에는 id :  { _id: req.params.postId }
+    // 2번째 인자에는 수정내용 : { ...req.body } => req.body로 실려온 모든 것을 spread한다.
+    // 3번째 인자에는 옵션 : { new: true, runValidators: false }
+    const post = await Post.findByIdAndUpdate(
+      { _id: req.params.postId },
+      { ...req.body },
+      { new: true, runValidators: false },
+    );
+    // post가 존재하지 않을 때
+    if (!post) {
+      return res.status(400).json({
+        success: false,
+        error: '포스트가 존재하지 않습니다.',
+        result: null,
+      });
+    }
+    // post가 존재하였으므로 삭제되었고,
+    // result로 업데이트된 post를 내보낸다.
+    res.status(200).json({
+      success: true,
+      error: null,
+      result: post,
     });
   } catch (error) {
     console.log(error);
