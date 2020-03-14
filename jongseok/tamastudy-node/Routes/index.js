@@ -5,10 +5,12 @@ const Post = require('../models/Post');
 router.get('/posts', async (req, res, next) => {
   try {
     let limit = 7;
-    if (req.query) {
-      limit = parseInt(req.query.limit);
+    if (req.query.limit) {
+      limit = req.query.limit;
     }
+    console.log(limit);
     const posts = await Post.find().limit(limit);
+    console.log(posts.length);
     res.status(200).json({
       success: true,
       error: null,
