@@ -61,10 +61,14 @@ router.post('/post/create', async (req, res, next) => {
 // http://localhost:4000/post/5e6c8fcbc66c3058b5fcf067
 router.get('/post/:postId', async (req, res, next) => {
   try {
-    // mongoose findById => 무엇(포스트)을 찾아야하므로
+    // mongoose findByIdAndUpdate = findById + update => 무엇(포스트)을 찾아야하므로
     // id에 해당하는 post를 찾을 수 없으면,
     // post는 존재하지않는다는 의미로 null을 반환한다.
-    const post = await Post.findById({ _id: req.params.postId });
+    const post = await Post.findByIdAndUpdate(
+      { _id: req.params.postId },
+      { $inc: { view: 1 } }, // api가 호출될때마다(즉 한번씩 getPostById를 볼때마다) 조회수(view) 늘리는 로직
+      { new: true, upsert: false },
+    );
     // post가 존재하지 않을 때
     if (!post) {
       return res.status(400).json({
@@ -73,7 +77,6 @@ router.get('/post/:postId', async (req, res, next) => {
         result: null,
       });
     }
-    // post가 존재하였으므로 삭제되었고,
     // result로 postId로 찾은 post를 내보낸다..
     res.status(200).json({
       success: true,
@@ -151,7 +154,7 @@ router.put('/post/update/:postId', async (req, res, next) => {
         result: null,
       });
     }
-    // post가 존재하였으므로 삭제되었고,
+    // post가 존재하였으므로 업데이트되었고,
     // result로 업데이트된 post를 내보낸다.
     res.status(200).json({
       success: true,
