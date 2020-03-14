@@ -8,7 +8,6 @@ router.get('/posts', async (req, res, next) => {
     if (req.query.limit) {
       limit = req.query.limit;
     }
-    console.log(limit);
     const posts = await Post.find().limit(limit);
     console.log(posts.length);
     res.status(200).json({
@@ -49,5 +48,29 @@ router.post('/post/create', async (req, res, next) => {
   }
 });
 
+router.get('/post/:postId', async (req, res, next) => {
+  try {
+    const post = await Post.findById({ _id: req.params.postId });
+    if (!post) {
+      res.status(400).json({
+        success: false,
+        error: '포스트가 존재하지 않습니다.',
+        result: null,
+      });
+    }
+    res.status(200).json({
+      success: true,
+      error: null,
+      result: post,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      success: false,
+      error: error.message,
+      result: null,
+    });
+  }
+});
+
 module.exports = router;
-//export default sldkfjsdlf
