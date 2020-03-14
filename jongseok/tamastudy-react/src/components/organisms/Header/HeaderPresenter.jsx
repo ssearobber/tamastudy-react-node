@@ -6,7 +6,7 @@ import theme from '../../../theme';
 import { ReactComponent as Logo } from '../../../assets/images/logo/nike.svg';
 import { PowerSettingsNew, AspectRatio } from '@material-ui/icons';
 import Typo from '../../atoms/Typo';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Container = styled.div`
   ${mediaQuery(2)} {
@@ -49,7 +49,7 @@ const AuthTypo = styled(Typo)`
   margin-left: ${theme.space}px;
 `;
 
-const LoginLink = styled(Link)`
+const LoginLink = styled(NavLink)`
   text-decoration: none;
   color: inherit;
 `;

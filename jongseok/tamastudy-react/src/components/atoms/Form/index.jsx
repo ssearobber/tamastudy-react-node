@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import theme from '../../../theme';
 
 const Container = styled.form`
   width: 100%;
+  margin: ${theme.space * 3}px 0;
 `;
 
 const Form = ({ onSubmit, className, children }) => {
