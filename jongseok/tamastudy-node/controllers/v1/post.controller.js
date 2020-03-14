@@ -1,21 +1,22 @@
-const express = require('express');
-const router = express.Router();
-const Post = require('../database/models/Post');
+const Post = require('../../database/models/Post');
 
 // GET
 // getPosts
 // postman uri ex
-// http://localhost:4000/posts
-router.get('/posts', async (req, res, next) => {
+// http://localhost:4000/v1/post
+exports.getPosts = async (req, res, next) => {
   try {
-    let limit = 7;
+    let limit = 7; // http://localhost:4000/v1/post?limit=여기에숫자 => 숫자를 입력한만큼만 데이터를 가져온다.
     if (req.query.limit) {
       limit = req.query.limit;
     }
-    const posts = await Post.find().limit(limit);
+    const posts = await Post.find()
+      .sort({ createdAt: -1 }) // 생성된 날짜 순서로 정렬
+      .limit(limit); // limit만큼만 데이터를 가져옴
     res.status(200).json({
       success: true,
       error: null,
+      total: posts.length,
       result: posts,
     });
   } catch (error) {
@@ -26,13 +27,13 @@ router.get('/posts', async (req, res, next) => {
       result: null,
     });
   }
-});
+};
 
 // POST
 // createPost
 // postman uri ex
-// http://localhost:4000/post/create
-router.post('/post/create', async (req, res, next) => {
+// http://localhost:4000/v1/post/create
+exports.createPost = async (req, res, next) => {
   try {
     const post = await Post.create({
       title: req.body.title,
@@ -53,13 +54,13 @@ router.post('/post/create', async (req, res, next) => {
       result: null,
     });
   }
-});
+};
 
 // GET
 // getPostById
 // postman uri ex
-// http://localhost:4000/post/5e6c8fcbc66c3058b5fcf067
-router.get('/post/:postId', async (req, res, next) => {
+// http://localhost:4000/v1/post/5e6c8fcbc66c3058b5fcf067
+exports.getPostById = async (req, res, next) => {
   try {
     // mongoose findById => 무엇(포스트)을 찾아야하므로
     // id에 해당하는 post를 찾을 수 없으면,
@@ -73,6 +74,11 @@ router.get('/post/:postId', async (req, res, next) => {
         result: null,
       });
     }
+    await Post.findByIdAndUpdate(
+      { _id: req.params.postId },
+      { $inc: { view: 1 } }, // api가 호출될때마다(즉 한번씩 getPostById를 볼때마다) 조회수(view) 늘리는 로직
+      { new: true, upsert: false },
+    );
     // post가 존재하였으므로 삭제되었고,
     // result로 postId로 찾은 post를 내보낸다..
     res.status(200).json({
@@ -88,13 +94,13 @@ router.get('/post/:postId', async (req, res, next) => {
       result: null,
     });
   }
-});
+};
 
 // DELETE
 // deletePostById
 // postman uri ex
-// http://localhost:4000/post/delete/5e6c8fcbc66c3058b5fcf067
-router.delete('/post/delete/:postId', async (req, res, next) => {
+// http://localhost:4000/v1/post/delete/5e6c8fcbc66c3058b5fcf067
+exports.deletePostById = async (req, res, next) => {
   try {
     // mongoose findByIdAndDelete => 무엇(포스트)을 삭제할지 찾아야하므로
     // id에 해당하는 post를 찾을 수 없으면,
@@ -124,13 +130,13 @@ router.delete('/post/delete/:postId', async (req, res, next) => {
       result: null,
     };
   }
-});
+};
 
 // Update
 // updatePostById
 // postman uri ex
-// http://localhost:4000/post/update/5e6c8fcbc66c3058b5fcf067
-router.put('/post/update/:postId', async (req, res, next) => {
+// http://localhost:4000/v1/post/update/5e6c8fcbc66c3058b5fcf067
+exports.updatePostById = async (req, res, next) => {
   try {
     // mongoose findByIdAndUpdate  => 무엇(포스트)을 업데이트(put)할지 찾아야하므로
     // id에 해당하는 post를 찾을 수 없으면,
@@ -166,6 +172,4 @@ router.put('/post/update/:postId', async (req, res, next) => {
       result: null,
     };
   }
-});
-
-module.exports = router;
+};

@@ -1,6 +1,19 @@
+const createError = require('http-errors');
+
 const errorResponse = (err, req, res, next) => {
-  console.error(err);
-  res.status(500).json({ success: false, message: '뭔가 에러 발생!' });
+  let apiError = err;
+
+  if (!err.status) {
+    apiError = createError(err);
+  }
+
+  // set locals, only providing error in development
+  res.locals.message = apiError.message;
+  res.locals.error = apiError;
+  // res.locals.error = process.env.NODE_ENV === 'development' ? apiError : {}
+
+  // render the error page
+  return res.status(apiError.status).json({ message: apiError.message });
 };
 
 module.exports = errorResponse;

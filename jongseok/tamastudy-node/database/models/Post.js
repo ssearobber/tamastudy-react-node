@@ -18,6 +18,10 @@ const postSchema = new Schema({
     type: String,
     required: [true, '이미지주소를 입력해주세요.'],
   },
+  view: {
+    type: Number,
+    default: 0,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
