@@ -3,7 +3,7 @@ const express = require('express');
 require('dotenv').config();
 const morgan = require('morgan');
 const router = require('./routes/index');
-const errorResponse = require('./Middlewares/errorResponse');
+const errorResponse = require('./middleware/errorResponse');
 const colors = require('colors');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
