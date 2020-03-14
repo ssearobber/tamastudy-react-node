@@ -1,24 +1,24 @@
 import React from 'react';
 import Swiper from 'react-id-swiper';
-import uuid from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 import { css } from '@emotion/core';
 import mediaQuery from '../../../theme/mediaQuery';
 
 const DUMMY_DATA = [
   {
-    id: uuid(),
+    id: uuidv4(),
     imgSrc:
       'https://images.unsplash.com/photo-1582787264476-ceb5898497c6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
     imgAlt: 'sample image',
   },
   {
-    id: uuid(),
+    id: uuidv4(),
     imgSrc:
       'https://images.unsplash.com/photo-1528150230181-99bbf7b22162?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
     imgAlt: 'sample image',
   },
   {
-    id: uuid(),
+    id: uuidv4(),
     imgSrc:
       'https://images.unsplash.com/photo-1557231146-afde25e6598f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
     imgAlt: 'sample image',

@@ -14,10 +14,11 @@ const defaultVariantMapping = {
   navTitle: 'h3',
 };
 
-const Typo = ({ variant, color, display, component, children, ...props }) => {
+const Typo = ({ variant, color, display, component, children, className, ...props }) => {
   const Component = component ?? defaultVariantMapping[variant];
   return (
     <Component
+      className={className}
       css={
         (css`
           color: ${color};
