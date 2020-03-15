@@ -36,13 +36,30 @@ exports.createPostComment = asyncHandler(async (req, res, next) => {
 // postman uri ex
 // http://localhost:4000/v1/post/:postId/comment
 exports.getPostComments = asyncHandler(async (req, res, next) => {
-  const postComments = await PostComment.find({ post: req.params.postId })
-    .sort({ createdAt: -1 })
+  const limit = req.query.limit ? parseInt(req.query.limit) : 5;
+
+  let query = { post: req.params.postId };
+  if (req.query.cursor) {
+    query['_id'] = { $lt: req.query.cursor };
+  }
+
+  let postComments = await PostComment.find(query)
+    .sort({ _id: -1, createdAt: -1 })
+    .limit(limit + 1)
     .select('-post');
+
+  const hasNextPage = postComments.length > limit;
+
+  postComments = hasNextPage ? postComments.slice(0, -1) : postComments;
 
   res.status(200).json({
     success: true,
     error: null,
+    total: postComments.length,
+    pageInfo: {
+      nextPageCursor: hasNextPage ? postComments[postComments.length - 1]._id : null,
+      hasNextPage,
+    },
     data: postComments,
   });
 });
