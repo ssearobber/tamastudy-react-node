@@ -2,6 +2,8 @@ const colors = {
   base: {
     white: '#FFFFFF',
     black: '#111111',
+    grey: '#e2e2e2',
+    darkGrey: '#3b3b3b',
   },
   main: {
     primary: '#272343',

@@ -1,11 +1,9 @@
 import React from 'react';
-import { Apps } from '@material-ui/icons';
 import { css } from '@emotion/core';
-import Typo from '../../atoms/Typo';
-import { useTheme } from 'emotion-theming';
 import NavTagItem from '../../molecules/NavTagItem';
-const HomeNavSlider = () => {
-  const theme = useTheme();
+import theme from '../../../theme';
+
+const HomeNavSlider = ({ ...props }) => {
   return (
     <div
       css={css`
@@ -13,8 +11,11 @@ const HomeNavSlider = () => {
         align-items: center;
         justify-content: space-between;
         box-sizing: border-box;
-        padding: 2rem 2rem 2rem 0;
+        padding: ${theme.space}px ${theme.space}px ${theme.space}px ${theme.space}px;
+        width: calc(100% - ${theme.space}px);
+        overflow: hidden;
       `}
+      {...props}
     >
       <div>
         <div
@@ -37,17 +38,17 @@ const HomeNavSlider = () => {
           <NavTagItem variant="BatteryStd" title="dsfklfjkdlsfjklsdjflksdjflsdfsdflsdj" />
           <NavTagItem variant="BatteryStd" title="dsfklfjkdlsfjklsdjflksdjflsdfsdflsdj" />
           <NavTagItem variant="BatteryStd" title="dsfklfjkdlsfjklsdjflksdjflsdfsdflsdj" />
+          <NavTagItem variant="BatteryStd" title="dsfklfjkdlsfjklsdjflksdjflsdfsdflsdj" />
+          <NavTagItem variant="BatteryStd" title="dsfklfjkdlsfjklsdjflksdjflsdfsdflsdj" />
+          <NavTagItem variant="BatteryStd" title="dsfklfjkdlsfjklsdjflksdjflsdfsdflsdj" />
+          <NavTagItem variant="BatteryStd" title="dsfklfjkdlsfjklsdjflksdjflsdfsdflsdj" />
+          <NavTagItem variant="BatteryStd" title="dsfklfjkdlsfjklsdjflksdjflsdfsdflsdj" />
+          <NavTagItem variant="BatteryStd" title="dsfklfjkdlsfjklsdjflksdjflsdfsdflsdj" />
+          <NavTagItem variant="BatteryStd" title="dsfklfjkdlsfjklsdjflksdjflsdfsdflsdj" />
         </div>
       </div>
-      {/* <div
-        css={css`
-          width: 20px;
-          text-align: right;
-        `}
-      >
-        <Apps style={{ fontSize: 30 }} />
-      </div> */}
     </div>
   );
 };
+
 export default HomeNavSlider;

@@ -3,22 +3,22 @@ import { css } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
 import * as Icons from '@material-ui/icons';
 import Typo from '../../atoms/Typo';
-const NavTagItem = ({ variant = 'Apple', title = 'no data' }) => {
+
+const NavTagItem = ({ variant = 'Apple', title = 'no data', ...props }) => {
   const theme = useTheme();
+
   const IconTag = Icons[variant];
+
   return (
     <div
       css={css`
         flex: none;
-        width: 16rem;
-        height: 6rem;
-        max-width: 16rem;
-        max-height: 6rem;
-        background-color: ${theme.colors.main.secondary};
-        &:nth-child(2n - 1) {
-          background-color: ${theme.colors.main.tertiary};
+        width: 160px;
+        height: 60px;
+        &:nth-of-type(2n) {
+          background-color: ${theme.colors.main.secondary};
         }
-        &:nth-child(2n - 1) {
+        &:nth-of-type(2n - 1) {
           background-color: ${theme.colors.main.tertiary};
         }
         display: flex;
@@ -30,6 +30,7 @@ const NavTagItem = ({ variant = 'Apple', title = 'no data' }) => {
           margin-right: ${theme.space}px;
         }
       `}
+      {...props}
     >
       <IconTag style={{ fontSize: 30 }} />
       <div
@@ -52,4 +53,5 @@ const NavTagItem = ({ variant = 'Apple', title = 'no data' }) => {
     </div>
   );
 };
+
 export default NavTagItem;

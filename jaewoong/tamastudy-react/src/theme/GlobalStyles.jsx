@@ -1,10 +1,10 @@
 import { Global, css } from '@emotion/core';
+import { useTheme } from 'emotion-theming';
 import React from 'react';
 import mediaQuery from './mediaQuery';
 import 'normalize.css';
 import './font-family.css';
 import 'swiper/css/swiper.css';
-import { useTheme } from 'emotion-theming';
 
 const GlobalStyles = () => {
   const theme = useTheme();
@@ -39,7 +39,7 @@ const GlobalStyles = () => {
           font-family: 'Nanum Gothic';
           all: unset;
         }
-        /* &는 자기 자신 .main-pagination .swiper-pagination-bullet를 의미한다.*/
+
         .main-pagination .swiper-pagination-bullet {
           width: 1.5rem;
           height: 1.5rem;
