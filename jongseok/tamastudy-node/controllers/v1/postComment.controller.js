@@ -92,3 +92,45 @@ exports.deletePostCommentById = asyncHandler(async (req, res, next) => {
     result: `${req.params.postCommentId}번 댓글의 삭제가 완료되었습니다. `,
   });
 });
+
+// Private
+// PUT
+// updatePostCommentById
+// postman uri ex
+// http://localhost:4000/v1/post/:postId/comment/update/:postCommentId
+exports.updatePostCommentById = asyncHandler(async (req, res, next) => {
+  const postComment = await PostComment.findByIdAndUpdate(
+    req.params.postCommentId,
+    {
+      ...req.body,
+    },
+    {
+      new: true,
+      runValidators: false,
+    },
+  );
+
+  if (!postComment) {
+    return res.status(400).json({
+      success: false,
+      error: '댓글을 찾을 수 없습니다. ',
+      data: null,
+    });
+  }
+
+  const currentUserId = req.currentUserId;
+
+  if (postComment.user.toString() !== currentUserId) {
+    return res.status(401).json({
+      success: false,
+      error: '해당 권한이 없습니다.',
+      result: null,
+    });
+  }
+
+  res.status(200).json({
+    success: true,
+    error: null,
+    result: postComment,
+  });
+});
