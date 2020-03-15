@@ -74,7 +74,10 @@ exports.signin = async (req, res, next) => {
 // http://localhost:4000/v1/user/users
 exports.users = async (req, res, next) => {
   try {
-    const users = await User.find().select('_id username email createdAt');
+    const users = await User.find().populate({
+      path: 'posts',
+      model: 'Post',
+    });
     console.log('he');
     res.status(200).json({
       success: true,

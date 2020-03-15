@@ -30,6 +30,12 @@ const userSchema = new Schema({
   profileImage: {
     type: String,
   },
+  posts: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: 'Post',
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,

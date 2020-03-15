@@ -13,7 +13,11 @@ const errorResponse = (err, req, res, next) => {
   // res.locals.error = process.env.NODE_ENV === 'development' ? apiError : {}
 
   // render the error page
-  return res.status(apiError.status).json({ message: apiError.message });
+  return res.status(apiError.status).json({
+    success: false,
+    error: apiError.message,
+    data: null,
+  });
 };
 
 module.exports = errorResponse;

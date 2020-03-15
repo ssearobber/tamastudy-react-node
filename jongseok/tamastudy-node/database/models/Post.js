@@ -10,10 +10,6 @@ const postSchema = new Schema({
     type: String,
     required: [true, '본문을 입력해주세요. '],
   },
-  username: {
-    type: String,
-    required: [true, '유저명을 입력해주세요. '],
-  },
   imgUrl: {
     type: String,
     required: [true, '이미지주소를 입력해주세요.'],
@@ -21,6 +17,10 @@ const postSchema = new Schema({
   view: {
     type: Number,
     default: 0,
+  },
+  user: {
+    type: mongoose.Types.ObjectId,
+    ref: 'User',
   },
   createdAt: {
     type: Date,
