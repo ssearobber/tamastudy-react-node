@@ -6,11 +6,15 @@ const {
   deletePostById,
   updatePostById,
 } = require('../../controllers/v1/post.controller');
+const postCommentRouter = require('./postComment.route');
 
 // middleware
 const { getCurrentUserId } = require('../../middleware/auth');
 
 const router = express.Router();
+
+// merge Route
+router.use('/:postId', postCommentRouter);
 
 // 컨트롤러를 불러온다. (즉, 이전에 작성했던 '로직'만 컨트롤러로 옮겼다고 생각하면 된다.)
 
