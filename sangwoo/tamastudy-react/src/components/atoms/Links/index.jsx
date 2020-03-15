@@ -1,30 +1,24 @@
-import React from 'react';
 import { css } from '@emotion/core';
 import { Link } from 'react-router-dom';
+import React from 'react';
 
-const GLink = ({ linkTitle, ...rest }) => {
-  const LinkMapping = {
-    HOME: '/',
-    TAMA: '/tama',
-    CONTACT: '/contact'
-  };
-
+const Links = ({ linkTitle, linkTo, ...rest }) => {
   return (
     <div {...rest}>
       <Link
-        to={LinkMapping[linkTitle]}
+        to={linkTo}
         css={css`
           text-decoration: none;
           font-size: 20px;
           font-weight: 600;
-          color: inherit;
-          transition: all 0.5s;
+          color: grey;
+          transition: all 0.3s;
           display: block;
-          width: 100px;
           text-align: center;
+          width: 100px;
           &:hover {
             color: black;
-            font-weight: 1000;
+            font-weight: 900;
           }
         `}
       >
@@ -34,4 +28,4 @@ const GLink = ({ linkTitle, ...rest }) => {
   );
 };
 
-export default GLink;
+export default Links;
