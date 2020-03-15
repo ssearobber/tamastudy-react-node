@@ -8,17 +8,30 @@ const User = require('../../database//models/User');
 // postman uri ex
 // http://localhost:4000/v1/post
 exports.getPosts = asyncHandler(async (req, res, next) => {
-  let limit = 7; // http://localhost:4000/v1/post?limit=여기에숫자 => 숫자를 입력한만큼만 데이터를 가져온다.
-  if (req.query.limit) {
-    limit = req.query.limit;
+  // http://localhost:4000/v1/post?limit=여기에숫자 => 숫자를 입력한만큼만 데이터를 가져온다.
+  const limit = req.query.limit ? parseInt(req.query.limit) : 7;
+
+  let query = {};
+  if (req.query.cursor) {
+    query['_id'] = { $lt: req.query.cursor };
   }
-  const posts = await Post.find()
-    .sort({ createdAt: -1 }) // 생성된 날짜 순서로 정렬
-    .limit(limit); // limit만큼만 데이터를 가져옴
+
+  let posts = await Post.find(query)
+    .sort({ _id: -1, createdAt: -1 })
+    .limit(limit + 1); // limit만큼만 데이터를 가져옴
+
+  const hasNextPage = posts.length > limit;
+
+  posts = hasNextPage ? posts.slice(0, -1) : posts;
+
   res.status(200).json({
     success: true,
     error: null,
     total: posts.length,
+    pageInfo: {
+      nextPageCursor: hasNextPage ? posts[posts.length - 1]._id : null,
+      hasNextPage,
+    },
     result: posts,
   });
 });
