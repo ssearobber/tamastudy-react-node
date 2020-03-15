@@ -1,7 +1,7 @@
 // library file require
-const colors = require('colors');
 const express = require('express');
 require('dotenv').config();
+const colors = require('colors');
 const helmet = require('helmet');
 const cors = require('cors');
 const morgan = require('morgan');
