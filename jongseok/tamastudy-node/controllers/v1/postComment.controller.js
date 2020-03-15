@@ -4,7 +4,7 @@ const PostComment = require('../../database/models/PostComment');
 const User = require('../../database//models/User');
 
 // Private
-// GET
+// POST
 // createPostComment
 // postman uri ex
 // http://localhost:4000/v1/post/:postId/comment/create
@@ -44,5 +44,51 @@ exports.getPostComments = asyncHandler(async (req, res, next) => {
     success: true,
     error: null,
     data: postComments,
+  });
+});
+
+// Private
+// DELETE
+// deletePostCommentById
+// postman uri ex
+// http://localhost:4000/v1/post/:postId/comment/delete/:postCommentId
+exports.deletePostCommentById = asyncHandler(async (req, res, next) => {
+  const postComment = await PostComment.findById(req.params.postCommentId);
+
+  if (!postComment) {
+    return res.status(400).json({
+      success: false,
+      error: '댓글을 찾을 수 없습니다. ',
+      data: null,
+    });
+  }
+
+  const currentUserId = req.currentUserId;
+
+  if (postComment.user.toString() !== currentUserId) {
+    return res.status(401).json({
+      success: false,
+      error: '해당 권한이 없습니다.',
+      result: null,
+    });
+  }
+
+  await User.updateOne(
+    { _id: currentUserId },
+    { $pull: { postComments: postComment.id } }, // 꺼내오는것, 즉 삭제 (cascade)
+  );
+
+  await Post.updateOne(
+    { _id: req.params.postId },
+    { $pull: { postComments: postComment.id } }, // 꺼내오는것, 즉 삭제 (cascade)
+  );
+
+  // 모든것이 통과되면 검색했던 postComment를 삭제한다.
+  await postComment.remove();
+
+  res.status(200).json({
+    success: true,
+    error: null,
+    result: `${req.params.postCommentId}번 댓글의 삭제가 완료되었습니다. `,
   });
 });

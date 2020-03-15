@@ -2,6 +2,7 @@ const express = require('express');
 const {
   createPostComment,
   getPostComments,
+  deletePostCommentById,
 } = require('../../controllers/v1/postComment.controller');
 
 // middleware
@@ -13,5 +14,6 @@ const router = express.Router({ mergeParams: true });
 
 router.route('/create').post(getCurrentUserId, createPostComment);
 router.route('/').get(getPostComments);
+router.route('/delete/:postCommentId').delete(getCurrentUserId, deletePostCommentById);
 
 module.exports = router;
