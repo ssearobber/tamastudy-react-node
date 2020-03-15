@@ -1,5 +1,5 @@
 const express = require('express');
-const { signup, signin, users } = require('../../controllers/v1/user.controller');
+const { signup, signin, users, me } = require('../../controllers/v1/user.controller');
 
 // middleware
 const { getCurrentUserId } = require('../../middleware/auth');
@@ -11,5 +11,6 @@ const router = express.Router();
 router.route('/signup').post(signup);
 router.route('/signin').post(signin);
 router.route('/users').get(getCurrentUserId, users);
+router.route('/me').all(getCurrentUserId, me);
 
 module.exports = router;

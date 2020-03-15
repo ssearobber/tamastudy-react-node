@@ -67,10 +67,34 @@ exports.users = asyncHandler(async (req, res, next) => {
       model: 'Post',
     })
     .select('-password');
-  console.log('he');
   res.status(200).json({
     success: true,
     error: null,
     data: users,
+  });
+});
+
+// Private
+// get
+// me
+// postman uri ex
+// http://localhost:4000/v1/user/me
+exports.me = asyncHandler(async (req, res, next) => {
+  const me = await User.findOne({ _id: req.currentUserId })
+    .populate({
+      path: 'posts',
+      model: 'Post',
+      select: '_id',
+    })
+    .populate({
+      path: 'postComments',
+      model: 'PostComment',
+      select: '_id',
+    })
+    .select('-password');
+  res.status(200).json({
+    success: true,
+    error: null,
+    data: me,
   });
 });
