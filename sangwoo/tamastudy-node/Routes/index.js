@@ -1,24 +1,47 @@
 const express = require('express');
 const router = express.Router();
+const Post = require('../models/Post');
 
-router.get('/', (req, res, next) => {
-  res.json({ success: true, message: '접속 성공 !' });
+router.get('/posts', async (req, res, next) => {
+  try {
+    const posts = await Post.find();
+    res.status(200).json({
+      success: false,
+      error: null,
+      result: posts,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({
+      success: false,
+      error: error.message,
+      result: null,
+    });
+  }
 });
 
-router.get('/post', (req, res, next) => {
+router.post('/post/create', async (req, res, next) => {
+  try {
+    const post = await Post.create({
+      title: req.body.title,
+      description: req.body.description,
+      username: req.body.username,
+      imgUrl: req.body.imgUrl,
+    });
+    res.status(200).json({
+      success: true,
+      error: null,
+      data: post,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({
+      success: false,
+      error: error.message,
+      result: null,
+    });
+  }
   //throw Error('hosting 에러!');
-  const post = [
-    {
-      id: 1,
-      title: 'node',
-    },
-    {
-      id: 2,
-      title: 'ruby',
-    },
-  ];
-  res.json({ success: true, data: post });
 });
 
 module.exports = router;
-//export default sldkfjsdlf

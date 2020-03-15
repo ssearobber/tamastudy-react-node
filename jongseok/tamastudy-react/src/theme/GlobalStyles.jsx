@@ -5,6 +5,7 @@ import mediaQuery from './mediaQuery';
 import 'normalize.css';
 import './font-family.css';
 import 'swiper/css/swiper.css';
+import superFormReset from './superFormReset';
 
 const GlobalStyles = () => {
   const theme = useTheme();
@@ -15,6 +16,7 @@ const GlobalStyles = () => {
           margin: 0;
           padding: 0;
         }
+        ${superFormReset};
         html {
           font-size: 62.5%;
 
@@ -46,6 +48,9 @@ const GlobalStyles = () => {
           &-active {
             background-color: ${theme.colors.main.primary};
           }
+        }
+        input[type='submit'],
+        input[type='reset'] {
         }
       `}
     />
