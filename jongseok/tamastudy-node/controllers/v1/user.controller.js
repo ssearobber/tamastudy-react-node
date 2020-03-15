@@ -67,3 +67,25 @@ exports.signin = async (req, res, next) => {
     });
   }
 };
+
+// get
+// users
+// postman uri ex
+// http://localhost:4000/v1/user/users
+exports.users = async (req, res, next) => {
+  try {
+    const users = await User.find().select('_id username email createdAt');
+    console.log('he');
+    res.status(200).json({
+      success: true,
+      error: null,
+      data: users,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      error: error.message,
+      data: null,
+    });
+  }
+};
