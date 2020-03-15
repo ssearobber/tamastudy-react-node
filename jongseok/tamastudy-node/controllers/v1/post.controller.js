@@ -1,6 +1,7 @@
 const Post = require('../../database/models/Post');
 const User = require('../../database//models/User');
 
+// Public
 // GET
 // getPosts
 // postman uri ex
@@ -65,6 +66,7 @@ exports.createPost = async (req, res, next) => {
   }
 };
 
+// Public
 // GET
 // getPostById
 // postman uri ex

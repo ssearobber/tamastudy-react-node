@@ -1,6 +1,7 @@
 const User = require('../../database/models/User');
 const createJWT = require('../../util/user/createJWT');
 
+// Public
 // post
 // signup
 // postman uri ex
@@ -31,6 +32,7 @@ exports.signup = async (req, res, next) => {
   }
 };
 
+// Public
 // post
 // signin
 // postman uri ex
@@ -68,16 +70,19 @@ exports.signin = async (req, res, next) => {
   }
 };
 
+// Private
 // get
 // users
 // postman uri ex
 // http://localhost:4000/v1/user/users
 exports.users = async (req, res, next) => {
   try {
-    const users = await User.find().populate({
-      path: 'posts',
-      model: 'Post',
-    });
+    const users = await User.find()
+      .populate({
+        path: 'posts',
+        model: 'Post',
+      })
+      .select('-password');
     console.log('he');
     res.status(200).json({
       success: true,
