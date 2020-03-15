@@ -1,4 +1,3 @@
-//import express from 'express';
 const express = require('express');
 require('dotenv').config();
 const morgan = require('morgan');
@@ -11,13 +10,12 @@ const helmet = require('helmet');
 const app = express();
 const PORT = 4000;
 const MASTER = 'Sangwoo';
-const MONGO_URI =
-  'mongodb+srv://sangwoo:1234@tama-x1c5j.mongodb.net/test?retryWrites=true&w=majority';
+const MONGO_URI = process.env.MONGO_URI || '';
 mongoose
   .connect(MONGO_URI, { useUnifiedTopology: true, useNewUrlParser: true })
   .then(() => console.log('DB접속 완료'))
   .catch(error => {
-    console.log(error.bgRed.white);
+    console.log(error);
     exit(1);
   });
 
