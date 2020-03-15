@@ -9,24 +9,24 @@ exports.signup = async (req, res, next) => {
   try {
     const existingUser = await User.findOne({ email: req.body.email });
     if (existingUser) {
-      return {
+      return res.status(400).json({
         success: false,
         error: `${req.body.email}는 존재하는 이메일입니다. `,
         data: null,
-      };
+      });
     }
     const newUser = await User.create({ ...req.body });
     const token = await createJWT(newUser._id);
-    return {
+    res.status(200).json({
       success: true,
       error: null,
       data: token,
-    };
+    });
   } catch (error) {
-    return {
+    return res.status(400).json({
       success: false,
       error: error.message,
       data: null,
-    };
+    });
   }
 };

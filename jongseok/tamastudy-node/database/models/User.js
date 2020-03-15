@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const Schema = mongoose.Schema;
 
@@ -34,5 +35,24 @@ const userSchema = new Schema({
     default: Date.now,
   },
 });
+
+// 모델 미들웨어
+userSchema.pre('save', async function(next) {
+  try {
+    if (!this.isModified('password')) {
+      next();
+    }
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(this.password, salt);
+    this.password = hashedPassword;
+  } catch {
+    next(error);
+  }
+});
+
+// 컨트롤러에서 호출하여 사용하는 모델 메소드
+userSchema.methods.matchPassword = async function(enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+};
 
 module.exports = mongoose.model('User', userSchema);

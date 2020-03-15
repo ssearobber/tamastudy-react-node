@@ -23,10 +23,6 @@ app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(express.json());
 app.use(morgan('dev'));
 
-app.use((req, res, next) => {
-  next(createError(404));
-});
-
 // 3. Routes
 app.use(router);
 app.use('/v1', v1Route);
