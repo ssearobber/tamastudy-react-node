@@ -99,6 +99,15 @@ exports.deletePostById = asyncHandler(async (req, res, next) => {
     });
   }
 
+  await User.updateOne(
+    {
+      _id: currentUserId,
+    },
+    {
+      $pull: { posts: post.id },
+    },
+  );
+
   // 모든것이 통과되면 검색했던 post를 삭제한다.
   await post.remove();
 
