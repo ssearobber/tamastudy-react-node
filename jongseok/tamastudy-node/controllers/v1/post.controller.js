@@ -50,7 +50,7 @@ exports.getPostById = asyncHandler(async (req, res, next) => {
   const post = await Post.findByIdAndUpdate(
     { _id: req.params.postId },
     { $inc: { view: 1 } }, // api가 호출될때마다(즉 한번씩 getPostById를 볼때마다) 조회수(view) 늘리는 로직
-    { new: true, upsert: false },
+    { new: true, runValidators: false },
   );
   // post가 존재하지 않을 때
   if (!post) {
@@ -98,6 +98,16 @@ exports.deletePostById = asyncHandler(async (req, res, next) => {
       result: null,
     });
   }
+
+  await User.updateOne(
+    {
+      _id: currentUserId,
+    },
+    {
+      $pull: { posts: post.id },
+      $pullAll: post.postComments,
+    },
+  );
 
   // 모든것이 통과되면 검색했던 post를 삭제한다.
   await post.remove();
