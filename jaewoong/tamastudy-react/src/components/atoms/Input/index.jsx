@@ -1,14 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import theme from '../../../theme';
 
 const Container = styled.input`
   width: 100%;
-  height: 40px;
   font-size: 2rem;
   font-weight: 900;
-  padding: 10px 20px;
+  box-sizing: border-box;
+  padding: ${theme.space * 4}px;
   outline: none;
+  border: 1px solid ${theme.colors.base.grey};
+  margin: ${theme.space}px 0;
 `;
 
 const Input = ({
