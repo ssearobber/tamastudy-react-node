@@ -8,6 +8,8 @@ const HeaderContainer = () => {
   return (
     <HeaderPresenter
       isLoggedIn={auth.isLoggedIn}
+      error={auth.authError}
+      loading={auth.authLoading}
       handleLogInFn={auth.handleLogInFn}
       handleLogOutFn={auth.handleLogOutFn}
     />

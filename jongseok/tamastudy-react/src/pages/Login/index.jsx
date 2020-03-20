@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import LoginForm from '../../components/organisms/LoginForm';
-import AuthContext from '../../context/AuthContext';
+import useAuthContext from '../../hooks/useAuthContext';
 
 const Login = () => {
-  const auth = useContext(AuthContext);
-  return <LoginForm handleLogInFn={auth.handleLogInFn} />;
+  const auth = useAuthContext();
+  return <LoginForm handleLogInFn={auth.handleLogInFn} loading={auth.authLoading} />;
 };
 
 export default Login;

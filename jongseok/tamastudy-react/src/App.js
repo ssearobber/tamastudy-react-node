@@ -12,13 +12,21 @@ import AuthContext from './context/AuthContext';
 import useAuth from './hooks/useAuth';
 
 const App = () => {
-  const { isLoggedIn, handleLogInFn, handleLogOutFn } = useAuth();
+  const {
+    isLoggedIn,
+    error: authError,
+    loading: authLoading,
+    handleLogInFn,
+    handleLogOutFn,
+  } = useAuth();
 
   return (
     <Router>
       <AuthContext.Provider
         value={{
           isLoggedIn,
+          authError,
+          authLoading,
           handleLogInFn,
           handleLogOutFn,
         }}

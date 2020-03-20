@@ -5,7 +5,14 @@ import Input from '../../atoms/Input';
 import Submit from '../../atoms/Submit';
 import PropTypes from 'prop-types';
 
-const LoginFormPresenter = ({ handleSubmit, handleChange, loginData, className, ...props }) => {
+const LoginFormPresenter = ({
+  handleSubmit,
+  handleChange,
+  loginData,
+  loading,
+  className,
+  ...props
+}) => {
   return (
     <ContainerLayout>
       <Form onSubmit={handleSubmit} className={className} {...props}>
@@ -29,6 +36,7 @@ const LoginFormPresenter = ({ handleSubmit, handleChange, loginData, className, 
           disabled={loginData.email.length < 5 && loginData.password.length < 2}
         />
       </Form>
+      {loading && <div>Loading ...</div>}
     </ContainerLayout>
   );
 };
