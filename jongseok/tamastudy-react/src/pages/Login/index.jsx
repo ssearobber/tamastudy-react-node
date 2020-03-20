@@ -1,13 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import LoginForm from '../../components/organisms/LoginForm';
+import AuthContext from '../../context/AuthContext';
 
-const Login = ({ handleLogInFn }) => {
-  return <LoginForm handleLogInFn={handleLogInFn} />;
-};
-
-Login.propTypes = {
-  handleLogInFn: PropTypes.func,
+const Login = () => {
+  const auth = useContext(AuthContext);
+  return <LoginForm handleLogInFn={auth.handleLogInFn} />;
 };
 
 export default Login;

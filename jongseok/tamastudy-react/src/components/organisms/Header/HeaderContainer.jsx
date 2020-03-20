@@ -1,14 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import HeaderPresenter from './HeaderPresenter';
+import useAuthContext from '../../../hooks/useAuthContext';
 
-const HeaderContainer = ({ isLoggedIn, handleLogOutFn }) => {
-  return <HeaderPresenter isLoggedIn={isLoggedIn} handleLogOutFn={handleLogOutFn} />;
-};
+const HeaderContainer = () => {
+  const auth = useAuthContext();
 
-HeaderContainer.propTypes = {
-  handleLogOutFn: PropTypes.func,
-  isLoggedIn: PropTypes.bool.isRequired,
+  return (
+    <HeaderPresenter
+      isLoggedIn={auth.isLoggedIn}
+      handleLogInFn={auth.handleLogInFn}
+      handleLogOutFn={auth.handleLogOutFn}
+    />
+  );
 };
 
 export default HeaderContainer;
