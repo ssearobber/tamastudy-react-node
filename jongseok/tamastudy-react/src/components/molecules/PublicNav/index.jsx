@@ -38,21 +38,6 @@ const PublicNav = () => {
           posts
         </CustomNavLink>
       </NavList>
-      <NavList>
-        <CustomNavLink to={'/contact'} activeStyle={activeStyle}>
-          contact
-        </CustomNavLink>
-      </NavList>
-      <NavList>
-        <CustomNavLink to={'/public1'} activeStyle={activeStyle}>
-          public 1
-        </CustomNavLink>
-      </NavList>
-      <NavList>
-        <CustomNavLink to={'/public2'} activeStyle={activeStyle}>
-          public 2
-        </CustomNavLink>
-      </NavList>
     </>
   );
 };

@@ -8,7 +8,6 @@ import Footer from './components/organisms/Footer';
 import Login from './pages/Login';
 import GetPosts from './pages/Post/GetPosts';
 import Navigation from './components/organisms/Navigation';
-import ContainerLayout from './components/layout/ContainerLayout';
 import AuthContext from './context/AuthContext';
 import useAuth from './hooks/useAuth';
 
@@ -30,33 +29,9 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/tama" component={Tama} />
-          <Route exact path="/login" component={Login}></Route>
+          <Route exact path="/login" component={Login} />
           <Route exact path="/posts" component={GetPosts} />
-          <Route
-            exact
-            path="/contact"
-            component={() => <ContainerLayout>contact</ContainerLayout>}
-          />
-          <Route
-            exact
-            path="/public1"
-            component={() => <ContainerLayout>public1</ContainerLayout>}
-          />
-          <Route
-            exact
-            path="/public2"
-            component={() => <ContainerLayout>public2</ContainerLayout>}
-          />
-          <Route
-            exact
-            path="/private1"
-            component={() => <ContainerLayout>private1</ContainerLayout>}
-          />
-          <Route
-            exact
-            path="/private2"
-            component={() => <ContainerLayout>private2</ContainerLayout>}
-          />
+          <Route exact path="/private" component={() => <div>Private2</div>} />
           <Redirect from="*" to="/" />
         </Switch>
         <Footer />

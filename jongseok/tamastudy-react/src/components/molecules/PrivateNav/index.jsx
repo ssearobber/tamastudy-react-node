@@ -34,13 +34,8 @@ const PrivateNav = () => {
   return (
     <>
       <NavList>
-        <CustomNavLink to={'/private1'} activeStyle={activeStyle}>
+        <CustomNavLink to={'/private'} activeStyle={activeStyle}>
           private 1
-        </CustomNavLink>
-      </NavList>
-      <NavList>
-        <CustomNavLink to={'/private2'} activeStyle={activeStyle}>
-          private 2
         </CustomNavLink>
       </NavList>
     </>

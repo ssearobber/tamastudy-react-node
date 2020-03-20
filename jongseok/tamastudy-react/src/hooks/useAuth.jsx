@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
 const useAuth = () => {
@@ -23,6 +23,12 @@ const useAuth = () => {
       toast.warn('로그아웃 실패');
     }
   };
+
+  useEffect(() => {
+    if (Boolean(localStorage.getItem('token'))) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   return {
     isLoggedIn,
