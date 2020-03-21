@@ -13,9 +13,15 @@ const Container = styled.button`
   cursor: pointer;
 `;
 
-const Submit = ({ btnText, disabled, className, ...props }) => {
+const Submit = ({ btnText, disabled, className, onClick, ...props }) => {
   return (
-    <Container type={'submit'} disabled={disabled} className={className} {...props}>
+    <Container
+      type={'submit'}
+      disabled={disabled}
+      className={className}
+      onClick={onClick}
+      {...props}
+    >
       {btnText}
     </Container>
   );

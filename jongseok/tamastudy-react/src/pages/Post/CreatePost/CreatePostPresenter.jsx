@@ -4,7 +4,17 @@ import Form from '../../../components/atoms/Form';
 import Input from '../../../components/atoms/Input';
 import Submit from '../../../components/atoms/Submit';
 
-const CreatePostPresenter = ({ formData, handleSubmit, handleChange }) => {
+const CreatePostPresenter = ({
+  formData,
+  imgCount,
+  imgUrl,
+  imgCheck,
+  handleSubmit,
+  handleChange,
+  handleChangeImgCount,
+  handleChangeImgUrl,
+  handleCheckImgUrl,
+}) => {
   return (
     <ContainerLayout>
       <Form onSubmit={handleSubmit}>
@@ -23,13 +33,29 @@ const CreatePostPresenter = ({ formData, handleSubmit, handleChange }) => {
           onChange={handleChange}
         />
         <Input
-          type={'text'}
-          placeholder={'Image URL'}
-          value={formData.imgUrl}
-          name={'imgUrl'}
-          onChange={handleChange}
+          type={'number'}
+          placeholder={'이미지 개수 선택'}
+          value={imgCount}
+          name={'imgCount'}
+          onChange={handleChangeImgCount}
+          min="1"
         />
-        <Submit btnText={'작성하기'} />
+        {new Array(Number(imgCount)).fill(undefined).map((d, i) => (
+          <div key={i}>
+            <Input
+              type={'text'}
+              placeholder={'Image URL'}
+              value={imgUrl.imgUrl}
+              name={`imgUrl${i}`}
+              onChange={handleChangeImgUrl}
+            />
+          </div>
+        ))}
+        {imgCheck ? (
+          <Submit btnText={'작성하기'} />
+        ) : (
+          <Submit btnText={'이미지 체크'} onClick={handleCheckImgUrl} />
+        )}
       </Form>
     </ContainerLayout>
   );
