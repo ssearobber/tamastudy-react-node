@@ -3,7 +3,7 @@ import LoginFormPresenter from './LoginFormPresenter';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
-const LoginFormContainer = ({ history, handleLogInFn }) => {
+const LoginFormContainer = ({ history, handleLogInFn, loading }) => {
   const [loginData, setLoginData] = useState({
     email: '',
     password: '',
@@ -12,7 +12,11 @@ const LoginFormContainer = ({ history, handleLogInFn }) => {
   const handleSubmit = () => {
     if (loginData.email.length > 5 && loginData.password.length > 2) {
       handleLogInFn();
-      history.push('/');
+      if (!loading) {
+        setTimeout(() => {
+          history.push('/');
+        }, 3000);
+      }
     }
   };
 
@@ -32,6 +36,7 @@ const LoginFormContainer = ({ history, handleLogInFn }) => {
       loginData={loginData}
       handleSubmit={handleSubmit}
       handleChange={handleChange}
+      loading={loading}
     />
   );
 };
