@@ -1,5 +1,6 @@
 import { useEffect, useReducer } from 'react';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const initialState = {
   isLoggedIn: false,
@@ -27,17 +28,18 @@ const reducerFunction = (state = initialState, action) => {
 const useAuth = () => {
   const [state, dispatch] = useReducer(reducerFunction, initialState);
 
-  const handleLogInFn = () => {
+  const handleLogInFn = async (loginData, history) => {
     try {
       dispatch({ type: 'LOADING' });
-      setTimeout(() => {
-        dispatch({ type: 'LOGGED_IN' });
-        localStorage.setItem('token', 'success login test ');
-        toast.success('로그인 성공');
-      }, 3000);
+      const response = await axios.post('http://localhost:4000/v1/user/signin', loginData);
+      const token = response.data.data;
+      dispatch({ type: 'LOGGED_IN' });
+      localStorage.setItem('token', token);
+      toast.success('로그인 성공');
+      history.push('/');
     } catch (error) {
       dispatch({ type: 'ERROR', payload: error.message });
-      toast.warn('로그인 실패');
+      toast.warn(`로그인 실패 : ${error.message}`);
     }
   };
 
@@ -54,7 +56,7 @@ const useAuth = () => {
 
   useEffect(() => {
     dispatch({ type: 'LOAD_STATUS' });
-    if (Boolean(localStorage.getItem('token'))) {
+    if (localStorage.getItem('token')) {
       dispatch({ type: 'LOGGED_IN' });
     }
   }, []);

@@ -10,14 +10,7 @@ const LoginFormContainer = ({ history, handleLogInFn, loading }) => {
   });
 
   const handleSubmit = () => {
-    if (loginData.email.length > 5 && loginData.password.length > 2) {
-      handleLogInFn();
-      if (!loading) {
-        setTimeout(() => {
-          history.push('/');
-        }, 3000);
-      }
-    }
+    handleLogInFn(loginData, history);
   };
 
   const handleChange = (event) => {
@@ -30,7 +23,6 @@ const LoginFormContainer = ({ history, handleLogInFn, loading }) => {
       [name]: value,
     });
   };
-
   return (
     <LoginFormPresenter
       loginData={loginData}
@@ -42,7 +34,9 @@ const LoginFormContainer = ({ history, handleLogInFn, loading }) => {
 };
 
 LoginFormContainer.propTypes = {
-  logInFn: PropTypes.func,
+  history: PropTypes.func,
+  handleLogInFn: PropTypes.func,
+  loading: PropTypes.bool,
 };
 
 export default withRouter(LoginFormContainer);

@@ -30,13 +30,8 @@ const LoginFormPresenter = ({
           value={loginData.password}
           name={'password'}
         />
-        <Submit
-          type={'submit'}
-          btnText={'로그인'}
-          disabled={loginData.email.length < 5 && loginData.password.length < 2}
-        />
+        <Submit btnText={'로그인'} />
       </Form>
-      {loading && <div>Loading ...</div>}
     </ContainerLayout>
   );
 };

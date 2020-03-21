@@ -9,10 +9,8 @@ const Container = styled.button`
   margin: ${theme.space}px 0;
   border: 0;
   color: ${theme.colors.base.white};
-  background-color: ${(props) =>
-    props.disabled ? theme.colors.base.grey : theme.colors.main.primary};
-  pointer-events: ${(props) => props.disabled && 'none'};
-  cursor: ${(props) => !props.disabled && 'pointer'};
+  background-color: ${theme.colors.main.primary};
+  cursor: pointer;
 `;
 
 const Submit = ({ btnText, disabled, className, ...props }) => {
