@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import mediaQuery from '../../../theme/mediaQuery';
 import theme from '../../../theme';
 import { ReactComponent as Logo } from '../../../assets/images/logo/nike.svg';
-import { PowerSettingsNew, AspectRatio } from '@material-ui/icons';
+import { PowerSettingsNew, AspectRatio, Cached } from '@material-ui/icons';
 import Typo from '../../atoms/Typo';
 import { NavLink } from 'react-router-dom';
 
@@ -54,7 +54,8 @@ const LoginLink = styled(NavLink)`
   color: inherit;
 `;
 
-const HeaderPresenter = ({ isLoggedIn, handleLogOutFn }) => {
+const HeaderPresenter = ({ isLoggedIn, error, loading, handleLogOutFn }) => {
+  console.log(loading);
   return (
     <Container>
       <Header>
@@ -67,7 +68,17 @@ const HeaderPresenter = ({ isLoggedIn, handleLogOutFn }) => {
 
         <HeaderMenuBox>
           <AuthBox onClick={isLoggedIn ? () => handleLogOutFn() : undefined}>
-            {isLoggedIn ? <PowerSettingsNew /> : <AspectRatio />}
+            {isLoggedIn ? (
+              loading ? (
+                <Cached />
+              ) : (
+                <PowerSettingsNew />
+              )
+            ) : loading ? (
+              <Cached />
+            ) : (
+              <AspectRatio />
+            )}
             <AuthTypo variant="body2">
               {isLoggedIn ? <span>Logout</span> : <LoginLink to="/login">LogIn</LoginLink>}
             </AuthTypo>

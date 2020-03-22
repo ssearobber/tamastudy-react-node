@@ -8,6 +8,7 @@ const createJWT = require('../../util/user/createJWT');
 // postman uri ex
 // http://localhost:4000/v1/user/signup
 exports.signup = asyncHandler(async (req, res, next) => {
+  // try catch 를 미들웨어 형식으로 설정
   const existingUser = await User.findOne({ email: req.body.email });
   if (existingUser) {
     return res.status(400).json({
@@ -16,7 +17,7 @@ exports.signup = asyncHandler(async (req, res, next) => {
       data: null,
     });
   }
-  const newUser = await User.create({ ...req.body });
+  const newUser = await User.create({ ...req.body }); // ...req.body 문법은 body안에 있는 모든값을 갖어오는 것
   const token = await createJWT(newUser._id);
   res.status(201).json({
     success: true,
@@ -39,7 +40,7 @@ exports.signin = asyncHandler(async (req, res, next) => {
       data: null,
     });
   }
-  const isCorrectPassword = existingUser.matchPassword(req.body.password);
+  const isCorrectPassword = existingUser.matchPassword(req.body.password); // token 해석하는 부분
   if (!isCorrectPassword) {
     return res.status(401).json({
       success: false,
@@ -47,7 +48,7 @@ exports.signin = asyncHandler(async (req, res, next) => {
       data: null,
     });
   }
-  const token = await createJWT(existingUser._id);
+  const token = await createJWT(existingUser._id); // 몽구DB의 유일한 ID값
   res.status(200).json({
     success: true,
     error: null,

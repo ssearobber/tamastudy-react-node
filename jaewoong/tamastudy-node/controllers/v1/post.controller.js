@@ -19,7 +19,7 @@ exports.getPosts = asyncHandler(async (req, res, next) => {
 exports.createPost = asyncHandler(async (req, res, next) => {
   const post = await Post.create({
     ...req.body,
-    user: req.currentUserId,
+    user: req.currentUserId, // 미들웨어에서 currentUserId을 설정해준다 auth.js
   });
 
   // 미들웨어(getCurrentUserId)를 통과했기 때문에, 아이디가 존재한다.

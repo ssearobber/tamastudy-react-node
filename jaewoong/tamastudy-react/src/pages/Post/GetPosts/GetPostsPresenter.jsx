@@ -52,7 +52,7 @@ const ComponentContents = styled.div`
   }
 `;
 
-const GetPostsPresenter = ({ posts, handleToastAlert }) => {
+const GetPostsPresenter = ({ posts, handleToastAlert, onClickMoveToCreatePost }) => {
   return (
     <Container>
       <ComponentTitleBox>
@@ -64,10 +64,7 @@ const GetPostsPresenter = ({ posts, handleToastAlert }) => {
             backgroundColor={'#34595e'}
             hoverBackgroundColor={'#183223'}
           />
-          <Button
-            text={'포스트 작성'}
-            onClick={() => handleToastAlert('info', '준비중입니다. 다음 주에 합시당~!')}
-          />
+          <Button text={'포스트 작성'} onClick={onClickMoveToCreatePost} />
           <Button
             text={'더보기'}
             onClick={() => handleToastAlert('info', '준비중입니다. 다음 주에 합시당~!')}
@@ -76,7 +73,7 @@ const GetPostsPresenter = ({ posts, handleToastAlert }) => {
       </ComponentTitleBox>
       <ComponentContents>
         {posts.map((post) => (
-          <PostWrapper {...post} />
+          <PostWrapper key={post._id} {...post} />
         ))}
       </ComponentContents>
     </Container>
