@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Home from './pages/Home';
 import Tama from './pages/Tama';
@@ -11,6 +11,7 @@ import GetPostById from './pages/Post/GetPostById';
 import Navigation from './components/organisms/Navigation';
 import AuthContext from './context/AuthContext';
 import useAuth from './hooks/useAuth';
+import useNavigation from './hooks/useNavigation';
 
 const App = () => {
   const {
@@ -21,7 +22,7 @@ const App = () => {
     handleLogOutFn,
   } = useAuth();
 
-  console.log(isLoggedIn, 'app');
+  const { handleNavigation, isNavOpen } = useNavigation();
 
   return (
     <Router>
@@ -34,8 +35,8 @@ const App = () => {
           handleLogOutFn,
         }}
       >
-        <Header />
-        <Navigation />
+        <Header handleNavigation={handleNavigation} />
+        <Navigation isNavOpen={isNavOpen} handleNavigation={handleNavigation} />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/tama" component={Tama} />
