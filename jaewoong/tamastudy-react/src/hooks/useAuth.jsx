@@ -31,19 +31,15 @@ const useAuth = () => {
   const handleLogInFn = async (loginData, history) => {
     try {
       dispatch({ type: 'LOADING' });
-
-      // 서버에 값을 넘겨주는 부분
       const response = await axios.post('http://localhost:4000/v1/user/signin', loginData);
       const token = response.data.data;
-      // setTimeout(() => {
       dispatch({ type: 'LOGGED_IN' });
       localStorage.setItem('token', token);
       toast.success('로그인 성공');
       history.push('/');
-      // }, 3000);
     } catch (error) {
       dispatch({ type: 'ERROR', payload: error.message });
-      toast.warn('로그인 실패');
+      toast.warn(`로그인 실패 : ${error.message}`);
     }
   };
 
@@ -60,7 +56,7 @@ const useAuth = () => {
 
   useEffect(() => {
     dispatch({ type: 'LOAD_STATUS' });
-    if (Boolean(localStorage.getItem('token'))) {
+    if (localStorage.getItem('token')) {
       dispatch({ type: 'LOGGED_IN' });
     }
   }, []);

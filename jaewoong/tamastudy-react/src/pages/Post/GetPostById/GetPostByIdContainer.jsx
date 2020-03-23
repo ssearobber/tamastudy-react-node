@@ -1,51 +1,55 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import GetPostByIdPresenter from './GetPostByIdPresenter';
 import { withRouter } from 'react-router-dom';
-import Axios from 'axios';
+import axios from 'axios';
 import { toast } from 'react-toastify';
 import useCustomFetch from '../../../hooks/useCustomFetch';
 
 const initialState = {};
 
-const GetPostByIdContainer = ({ match, history }) => {
+const GetPostByIdContainer = ({ history, match }) => {
   const postId = match.params.postId;
+
+  //
+
   const post = useCustomFetch(initialState, `http://localhost:4000/v1/post/${postId}`);
 
-  //   const fetchPostById = async () => {
-  //     try {
-  //       const post = await Axios.get(`http://localhost:4000/v1/post/${postId}`);
-  //       setPost(post.data.result);
-  //     } catch (error) {
-  //       toast.error(error.massage.data.error);
-  //     }
-  //   };
-
-  //   useEffect(() => {
-  //     fetchPostById();
-  //   }, [postId]);
+  //
 
   const deletePostById = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await Axios.delete(`http://localhost:4000/v1/post/delete/${postId}`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      });
-      toast.success(response.data.result);
-      history.push('/posts');
+      if (window.confirm('삭제하시겠습니까?')) {
+        const token = localStorage.getItem('token');
+        const config = {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        };
+        const response = await axios.delete(
+          `http://localhost:4000/v1/post/delete/${postId}`,
+          config,
+        );
+        toast.success(response.data.result);
+        history.push('/posts');
+      }
     } catch (error) {
       toast.error(error.response.data.error);
     }
   };
 
-  const beforePostById = async () => {
-    history.goback();
+  const onClickMoveToBack = () => {
+    history.goBack();
   };
 
-  console.log(post);
-
-  return <GetPostByIdPresenter post={post} deletePostById={deletePostById} />;
+  return (
+    <div>
+      <GetPostByIdPresenter
+        post={post}
+        deletePostById={deletePostById}
+        onClickMoveToBack={onClickMoveToBack}
+      />
+    </div>
+  );
 };
 
 export default withRouter(GetPostByIdContainer);

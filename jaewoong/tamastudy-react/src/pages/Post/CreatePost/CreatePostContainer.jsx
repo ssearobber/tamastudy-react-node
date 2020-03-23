@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import CreatePostPresenter from './CreatePostPresenter';
-import useAuthContext from '../../../hooks/useAuthContext';
 import { Redirect, withRouter } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import useAuthContext from '../../../hooks/useAuthContext';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const initialState = {
   title: '',
@@ -13,12 +13,17 @@ const initialState = {
 
 const CreatePostContainer = ({ history }) => {
   const [formData, setFormData] = useState(initialState);
+  const [imgCount, setImgCount] = useState(1);
+  const [imgUrl, setImgUrl] = useState({});
+  const [imgCheck, setImgCheck] = useState(false);
 
   const ctxData = useAuthContext();
 
   const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    // console.log(formData);
     try {
-      event.preventDefault(); // 새로고침을 지우는 것
       const token = localStorage.getItem('token');
       if (!token) {
         return alert('invalid token');
@@ -28,22 +33,47 @@ const CreatePostContainer = ({ history }) => {
           authorization: `Bearer ${token}`,
         },
       });
-      toast.success('작성이 완료 되었습니다');
+      toast.success('작성이 완료 되었습니다.');
       history.push('/posts');
     } catch (error) {
-      //   console.log(error);
-      //   const errorArr = error.response.data.error.split(',');
-      //   errorArr.map((err) => error(err));
-      //   toast.error(`작성이 실패 되었습니다'\n${error.response.data.error}`);
+      const errorArr = error.response.data.error.split(',');
+      errorArr.map((err) => toast.error(err));
     }
   };
 
   const handleChange = (event) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleChangeImgCount = (event) => {
+    if (imgCount >= 1) {
+      setImgCount(event.target.value);
+    } else if (imgCount < 1) {
+      alert('오류');
+    }
+  };
+
+  const handleChangeImgUrl = (event) => {
+    setImgUrl({
+      ...imgUrl,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleCheckImgUrl = (event) => {
+    event.preventDefault();
+    setFormData({
+      ...formData,
+      imgUrl: Object.values(imgUrl),
+    });
+    setImgCheck(true);
   };
 
   if (ctxData.authLoading) {
-    return <div>Loading...</div>;
+    return <div>Loading ...</div>;
   }
 
   if (!ctxData.isLoggedIn) {
@@ -51,14 +81,18 @@ const CreatePostContainer = ({ history }) => {
   }
 
   return (
-    <div>
-      <CreatePostPresenter
-        formData={formData}
-        handleSubmit={handleSubmit}
-        handleChange={handleChange}
-      />
-    </div>
+    <CreatePostPresenter
+      formData={formData}
+      imgCount={imgCount}
+      imgUrl={imgUrl}
+      imgCheck={imgCheck}
+      handleSubmit={handleSubmit}
+      handleChange={handleChange}
+      handleChangeImgCount={handleChangeImgCount}
+      handleChangeImgUrl={handleChangeImgUrl}
+      handleCheckImgUrl={handleCheckImgUrl}
+    />
   );
 };
 
-export default withRouter(CreatePostContainer); // withRouter를 사용하면 이 컴포넌트에서 props로 받는다. 그래서 const CreatePostContainer = ({ history })로 받는다.
+export default withRouter(CreatePostContainer);

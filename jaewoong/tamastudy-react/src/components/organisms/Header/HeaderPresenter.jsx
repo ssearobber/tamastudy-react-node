@@ -54,12 +54,12 @@ const LoginLink = styled(NavLink)`
   color: inherit;
 `;
 
-const HeaderPresenter = ({ isLoggedIn, error, loading, handleLogOutFn }) => {
+const HeaderPresenter = ({ isLoggedIn, error, loading, handleLogOutFn, handleNavigation }) => {
   console.log(loading);
   return (
     <Container>
       <Header>
-        <LogoBox>
+        <LogoBox onClick={handleNavigation}>
           <LogoSize>
             <Logo />
           </LogoSize>
