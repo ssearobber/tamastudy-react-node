@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import theme from '../../../theme';
 import mediaQuery from '../../../theme/mediaQuery';
+import { withRouter } from 'react-router-dom';
 
 const Container = styled.div`
   background-color: blue;
@@ -70,9 +71,9 @@ const PostCreatedAt = styled.div`
   text-align: right;
 `;
 
-const PostWrapper = ({ _id, imgUrl, title, username, createdAt }) => {
+const PostWrapper = ({ history, _id, imgUrl, title, username, createdAt }) => {
   return (
-    <Container key={_id} imgUrl={imgUrl}>
+    <Container key={_id} imgUrl={imgUrl[0]} onClick={() => history.push(`/post/${_id}`)}>
       <PostContents>
         <PostId>{_id}</PostId>
         <PostTitle>{title}</PostTitle>
@@ -83,4 +84,4 @@ const PostWrapper = ({ _id, imgUrl, title, username, createdAt }) => {
   );
 };
 
-export default PostWrapper;
+export default withRouter(PostWrapper);
