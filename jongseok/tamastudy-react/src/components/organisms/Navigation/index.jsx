@@ -3,19 +3,30 @@ import styled from '@emotion/styled';
 import theme from '../../../theme';
 import useAuthContext from '../../../hooks/useAuthContext';
 import { NavLink } from 'react-router-dom';
-import { PowerSettingsNew, AspectRatio, Close } from '@material-ui/icons';
+import { Apple, BeachAccess, Call, Chat, Cloud, Eco } from '@material-ui/icons';
 
-const Container = styled.ul`
+const BackDrop = styled.div`
   position: fixed;
   left: 0;
   top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10000;
+  transition: transform 0.25s;
+  transform: ${(props) => (props.isNavOpen ? 'translateX(-100%)' : 'translateX(0)')};
+  background-color: rgba(0, 0, 0, 0.5);
+`;
+
+const NavContainer = styled.ul`
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10001;
+  transition: transform 0.25s;
+  transform: ${(props) => (props.isNavOpen ? 'translateX(-345px)' : 'translateX(0)')};
   background-color: ${theme.colors.base.darkGrey};
   width: 345px;
-  transition: transform 0.25s;
-  transform: ${(props) => (props.isNavOpen ? 'translateX(-375px)' : 'translateX(0)')};
   height: 100vh;
-  z-index: 10000;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -93,65 +104,57 @@ const Legal = styled.div`
   font-size: 1.4rem;
 `;
 
-const CloseBox = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 1.5rem;
-  cursor: pointer;
-`;
-
 const activeStyle = { backgroundColor: theme.colors.text.darkPrimary };
 
 const Navigation = ({ isNavOpen, handleNavigation }) => {
   const auth = useAuthContext();
 
   return (
-    <Container isNavOpen={isNavOpen}>
-      <CloseBox onClick={handleNavigation}>
-        <Close style={{ color: theme.colors.base.white, fontSize: 20 }} />
-      </CloseBox>
-      <NavUl>
-        <NavList>
-          <CustomNavLink to={'/posts'} activeStyle={activeStyle} onClick={handleNavigation}>
-            <PowerSettingsNew style={{ fontSize: 14 }} />
-            <ListText className={'list-text'}>Posts</ListText>
-          </CustomNavLink>
-        </NavList>
-        <NavList>
-          <CustomNavLink to={'/private'} activeStyle={activeStyle} onClick={handleNavigation}>
-            <AspectRatio style={{ fontSize: 14 }} />
-            <ListText className={'list-text'}>private 1</ListText>
-          </CustomNavLink>
-        </NavList>
-        <NavList>
-          <CustomNavLink to={'/4214'} activeStyle={activeStyle} onClick={handleNavigation}>
-            <AspectRatio style={{ fontSize: 14 }} />
-            <ListText className={'list-text'}>Board</ListText>
-          </CustomNavLink>
-        </NavList>
-        <NavList>
-          <CustomNavLink to={'/123'} activeStyle={activeStyle} onClick={handleNavigation}>
-            <AspectRatio style={{ fontSize: 14 }} />
-            <ListText className={'list-text'}>Study</ListText>
-          </CustomNavLink>
-        </NavList>
-        <NavList>
-          <CustomNavLink to={'/123'} activeStyle={activeStyle} onClick={handleNavigation}>
-            <AspectRatio style={{ fontSize: 14 }} />
-            <ListText className={'list-text'}>private 1</ListText>
-          </CustomNavLink>
-        </NavList>
-        <NavList>
-          <CustomNavLink to={'/123'} activeStyle={activeStyle} onClick={handleNavigation}>
-            <AspectRatio style={{ fontSize: 14 }} />
-            <ListText className={'list-text'}>Contact</ListText>
-          </CustomNavLink>
-        </NavList>
-      </NavUl>
+    <>
+      <BackDrop isNavOpen={isNavOpen} onClick={handleNavigation} />
+      <NavContainer isNavOpen={isNavOpen}>
+        <NavUl>
+          <NavList>
+            <CustomNavLink to={'/posts'} activeStyle={activeStyle} onClick={handleNavigation}>
+              <Apple style={{ fontSize: 14 }} />
+              <ListText className={'list-text'}>Posts</ListText>
+            </CustomNavLink>
+          </NavList>
+          <NavList>
+            <CustomNavLink to={'/private'} activeStyle={activeStyle} onClick={handleNavigation}>
+              <BeachAccess style={{ fontSize: 14 }} />
+              <ListText className={'list-text'}>private 1</ListText>
+            </CustomNavLink>
+          </NavList>
+          <NavList>
+            <CustomNavLink to={'/4214'} activeStyle={activeStyle} onClick={handleNavigation}>
+              <Call style={{ fontSize: 14 }} />
+              <ListText className={'list-text'}>Board</ListText>
+            </CustomNavLink>
+          </NavList>
+          <NavList>
+            <CustomNavLink to={'/123'} activeStyle={activeStyle} onClick={handleNavigation}>
+              <Chat style={{ fontSize: 14 }} />
+              <ListText className={'list-text'}>Study</ListText>
+            </CustomNavLink>
+          </NavList>
+          <NavList>
+            <CustomNavLink to={'/123'} activeStyle={activeStyle} onClick={handleNavigation}>
+              <Cloud style={{ fontSize: 14 }} />
+              <ListText className={'list-text'}>private 1</ListText>
+            </CustomNavLink>
+          </NavList>
+          <NavList>
+            <CustomNavLink to={'/123'} activeStyle={activeStyle} onClick={handleNavigation}>
+              <Eco style={{ fontSize: 14 }} />
+              <ListText className={'list-text'}>Contact</ListText>
+            </CustomNavLink>
+          </NavList>
+        </NavUl>
 
-      <Legal>&copy; 2020 by Tamastudy. All rights reserved</Legal>
-    </Container>
+        <Legal>&copy; 2020 by Tamastudy. All rights reserved</Legal>
+      </NavContainer>
+    </>
   );
 };
 
